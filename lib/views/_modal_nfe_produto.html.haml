@@ -1,0 +1,82 @@
+-# variáveis locais: det, prod
+.modal{style: "display: none; width: 800px; margin-left: -400px", id: "det-#{det.attr('nItem')}"}
+  .modal-header
+    %a.close(data-dismiss="modal") ×
+    %h3 Detalhes do Item #{det.attr('nItem')}: #{prod.css('xProd').text}
+  .modal-body
+    %section.visualizacao-documento
+      %table.table.table-condensed.table-striped.inner
+        %col(width='25%' span=4)/
+        %tr
+          %th(colspan=4) Descrição
+        %tr
+          %td(colspan=4)= prod.css('xProd').text
+        %tr
+          %th Código do Produto
+          %th Código NCM
+          %th CFOP
+          %th Valor Total
+        %tr
+          %td= prod.css('cProd').text
+          %td= prod.css('NCM').text
+          %td= prod.css('CFOP').text
+          %td= number_to_currency_br prod.css('vProd').text
+        %tr
+          %th(colspan=4) Indicador de Composição do Valor Total da NF-e
+        %tr
+          %td(colspan=4)= codigo_e_descricao prod.css('indTot').text, :nfe, :ind_tot
+        %tr
+          %th Código EAN Comercial
+          %th Unidade Comercial
+          %th Quantidade Comercial
+          %th Valor Unitário de Comercialização
+        %tr
+          %td= prod.css('cEAN').text
+          %td= prod.css('uCom').text
+          %td= number_with_delimiter_br prod.css('qCom').text
+          %td= number_to_currency_br prod.css('vUnTrib').text
+        %tr
+          %th Código EAN Tributável
+          %th Unidade Tributável
+          %th Quantidade Tributável
+          %th Valor Unitário de Tributação
+        %tr
+          %td= prod.css('cEANTrib').text
+          %td= prod.css('uTrib').text
+          %td= number_with_delimiter_br prod.css('qTrib').text
+          %td= number_to_currency_br prod.css('vUnTrib').text
+
+      - det.css('ICMS ICMS00').each do |icms|
+        %h3 ICMS Normal e ST
+        %table.table.table-condensed.table-striped.inner
+          %col(width='33%' span=3)
+          %tr
+            %th Origem da Mercadoria
+            %th Tributação do ICMS
+            %th Modalidade Definição da BC ICMS NORMAL
+          %tr
+            %td= codigo_e_descricao icms.css('orig').text, :nfe, :icms, :origem
+            %td= codigo_e_descricao icms.css('CST').text, :nfe, :icms, :cst
+            %td= codigo_e_descricao icms.css('modBC').text, :nfe, :icms, :mod_bc_icms_normal
+          %tr
+            %th Base de Cálculo do ICMS Normal
+            %th Alíquota do ICMS Normal
+            %th Valor do ICMS Normal
+          %tr
+            %td= number_to_currency_br icms.css('vBC').text
+            %td= number_to_percentage icms.css('pICMS').text
+            %td= number_to_currency_br icms.css('vICMS').text
+
+      - det.css('IPI').each do |ipi|
+        %h3 Imposto sobre Produtos Industrializados
+        %table.table.table-condensed.table-striped.inner
+          %tr
+            %th Código do Enquadramento
+          %tr
+            %td= ipi.css('cEnq').text
+          %tr
+            %th CST
+          %tr
+            %td= codigo_e_descricao ipi.css('IPINT CST').text, :nfe, :ipi, :cst
+  .modal-footer
+    = link_to 'Fechar', '#', class: 'btn', data: { dismiss: 'modal' }

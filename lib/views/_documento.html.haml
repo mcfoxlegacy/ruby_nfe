@@ -1,0 +1,50 @@
+%section.visualizacao-documento
+  %table.table.table-condensed.table-striped
+    %tr
+      %th Chave de Acesso
+      %th Número NF-e
+      %th Versão
+    %tr
+      %td= f xml.at_xpath('//infNFe/@Id').text[3..-1] rescue nil
+      %td= number_with_delimiter_br xml.css('infNFe nNF').text
+      %td= xml.at_xpath('//infNFe/@versao').text
+  .tabbable
+    %ul.nav.nav-tabs
+      %li.active
+        %a(href='#nfe-dados' data-toggle='tab') NF-e
+      %li
+        %a(href='#nfe-emit' data-toggle='tab') Emit.
+      %li
+        %a(href='#nfe-dest' data-toggle='tab') Dest.
+      %li
+        %a(href='#nfe-itens' data-toggle='tab') Produtos/Serviços
+      %li
+        %a(href='#nfe-totais' data-toggle='tab') Totais
+      -#
+        %li
+          %a(href='#nfe-comex' data-toggle='tab') Com. Ext.
+      %li
+        %a(href='#nfe-transp' data-toggle='tab') Transp.
+      %li
+        %a(href='#nfe-cobr' data-toggle='tab') Cobr.
+      %li
+        %a(href='#nfe-inf' data-toggle='tab') Inf. Adicionais
+    .tab-content
+      .tab-pane#nfe-dados.active
+        = render 'documento_nfe_01_geral', :xml => xml
+      .tab-pane#nfe-emit
+        = render 'documento_nfe_02_emit', :xml => xml
+      .tab-pane#nfe-dest
+        = render 'documento_nfe_03_dest', :xml => xml
+      .tab-pane#nfe-itens
+        Itens
+      .tab-pane#nfe-totais
+        = render 'documento_nfe_05_totais', :xml => xml
+      .tab-pane#nfe-comex
+        = render 'documento_nfe_06_comex', :xml => xml
+      .tab-pane#nfe-transp
+        = render 'documento_nfe_07_transp', :xml => xml
+      .tab-pane#nfe-cobr
+        = render 'documento_nfe_08_cobr', :xml => xml
+      .tab-pane#nfe-inf
+        = render 'documento_nfe_09_inf', :xml => xml

@@ -1,0 +1,43 @@
+%h3 Totais ICMS
+%table.table.table-condensed.table-striped.inner
+  %col(width='25%' span=4)/
+  %tr
+    %th Base de Cálculo ICMS
+    %th Valor do ICMS
+    %th Base de Cálculo ICMS ST
+    %th Valor ICMS Substituição
+  %tr
+    %td= number_to_currency_br xml.css('NFe infNFe total vBC').text
+    %td= number_to_currency_br xml.css('NFe infNFe total vICMS').text
+    %td= number_to_currency_br xml.css('NFe infNFe total vBCST').text
+    %td= number_to_currency_br xml.css('NFe infNFe total vST').text
+  %tr
+    %th Valor Total dos Produtos
+    %th Valor do Frete
+    %th Valor do Seguro
+    %th Outras Despesas
+  %tr
+    %td= number_to_currency_br xml.css('NFe infNFe total vProd').text
+    %td= number_to_currency_br xml.css('NFe infNFe total vFrete').text
+    %td= number_to_currency_br xml.css('NFe infNFe total vSeg').text
+    %td= number_to_currency_br xml.css('NFe infNFe total vOutro').text
+  %tr
+    %th Valor Total do IPI
+    %th Valor Total da NF-e
+    %th Valor Total dos Desc.
+    %th Valor Total do II
+  %tr
+    %td= number_to_currency_br xml.css('NFe infNFe total vIPI').text
+    %td= number_to_currency_br xml.css('NFe infNFe total vNF').text
+    %td= number_to_currency_br xml.css('NFe infNFe total vDesc').text
+    %td= number_to_currency_br xml.css('NFe infNFe total vII').text
+  %tr
+    %th Valor Total do PIS
+    %th Valor Total da COFINS
+    %th
+    %th
+  %tr
+    %td= number_to_currency_br xml.css('NFe infNFe total vPIS').text
+    %td= number_to_currency_br xml.css('NFe infNFe total vCOFINS').text
+    %td
+    %td

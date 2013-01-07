@@ -1,0 +1,33 @@
+%h3 Cobrança
+%h4 Fatura
+%table.table.table-condensed.table-striped.inner
+  %col(width='33%' span=3)/
+  - if !(fat = xml.css('NFe infNFe cobr fat')).empty?
+    %tr
+      %th Número
+      %th Valor Original
+      %th Valor Líquido
+    %tr
+      %td= number_with_delimiter_br fat.css('nFat').text
+      %td= number_to_currency_br fat.css('vOrig').text
+      %td= number_to_currency_br fat.css('vLiq').text
+  - else
+    %tr.nodata
+      %td(colspan=3) Não informada na NF-e
+%h4 Duplicatas
+%table.table.table-condensed.table-striped.inner
+  %colgroup
+    %col(width='33%' span=3)/
+  - if !(dups = xml.css('NFe infNFe cobr dup')).empty?
+    %tr
+      %th Número
+      %th Vencimento
+      %th Valor
+    - dups.each do |d|
+      %tr
+        %td= d.css('nDup').text
+        %td= format_date d.css('dVenc').text.to_date rescue '-'
+        %td= number_to_currency_br d.css('vDup').text
+  - else
+    %tr.nodata
+      %td(colspan=3) Nenhuma duplicata informada na NF-e

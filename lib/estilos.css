@@ -1,0 +1,74 @@
+.visualizacao-documento
+ table {
+ 	 	width: 100%;
+		margin-bottom: 18px;
+       }
+
+.visualizacao-documento 
+ table.table 
+  th { 
+  		text-align:left; 
+  		font-weight:normal; 
+  		color:#7D2B3D; 
+  		font-size:8.5pt;
+		  margin-bottom: 18px; 
+     }
+
+.visualizacao-documento 
+ table.table.inner{ margin-bottom:.3em }
+
+.visualizacao-documento 
+ table.table.inner 
+  td { font-size:8.5pt }
+
+.visualizacao-documento h3,
+.visualizacao-documento h4 { margin:0 0 .2em .4em }
+.visualizacao-documento h3 { font-size:10pt; text-transform:uppercase }
+.visualizacao-documento h4 { font-size:9pt }
+ table.notas tbody td { font-size:8pt; padding:5px }
+ table.notas tbody tr.com-erro td { color:red }
+ table.notas tbody tr.nao-lido td { font-weight:700 }
+
+th.check,th.fill { cursor:pointer }
+
+table { border-collapse: collapse; }
+
+table tbody tr.selected td,
+table tbody tr.selected th { background-color:#c7eefe }
+
+table tbody tr.selected:nth-child(odd) td,
+table tbody tr.selected:nth-child(odd) th { background-color:#b6d9e8 }
+table tbody tr.selected:hover td,
+table tbody tr.selected:hover th { background-color:#a4c2d1 }
+
+.table-footer { min-height:3em }
+.table-footer .pagination { margin:0; float:right }
+.table-footer .page-entries {float:left; padding-left:1em; padding-top:.75em}
+.table-striped tbody tr:hover td,
+.table-striped tbody tr:hover th { background-color:#f0f0f0 }
+.table-striped tbody tr[data-url]:hover td,
+.table-striped tbody tr[data-url]:hover th { cursor:pointer; }
+.table-actions { text-align:center } 
+table tr.nodata td { text-align:center; font-style:italic; padding:25px 0;font-size:9pt }
+div.c,td.c,th.c { text-align:center !important }
+td.money { text-align:right }
+td.money div{ float:left; text-align:left }
+
+table.table thead th { text-align:center; vertical-align:middle }
+table.table tbody th { text-align:right; padding-right:1em }
+table.table thead.l th { text-align:left }
+table caption { caption-side:bottom; text-align:right; font-size:8pt; color:#dadada }
+table caption.hidden { display:none }
+
+.table-condensed th, 
+.table-condensed td { padding: 4px 5px; }
+
+table td, table th {
+    border-top-width: 1px;
+    border-top-style: solid;
+    border-top-color: #DDD;
+}
+
+table th a { text-decoration:none }
+table th a.sorted-asc:after { content:'▼' }
+table th a.sorted-desc:after { content:'▲' }

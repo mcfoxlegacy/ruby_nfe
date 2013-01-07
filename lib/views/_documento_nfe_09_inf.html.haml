@@ -1,0 +1,37 @@
+%h3 Informações Adicionais
+%table.table.table-condensed.table-striped.inner
+  %col(width='33%' span=3)/
+  %tr
+    %th Formato de Impressão
+    %th Formato de Emissão
+    %th Dígito Verificador da Chave de Acesso
+  %tr
+    %td= codigo_e_descricao xml.css('NFe infNFe tpImp').text, :nfe, :formato_impressao
+    %td= xml.css('NFe infNFe tpEmis').text
+    %td= xml.css('NFe infNFe cDV').text
+  %tr
+    %th Identificação do Ambiente
+    %th Finalidade
+    %th Processo
+  %tr
+    %td= codigo_e_descricao xml.css('NFe infNFe tpAmb').text, :nfe, :ambiente_sefaz
+    %td= xml.css('NFe infNFe finNFe').text
+    %td= xml.css('NFe infNFe procEmi').text
+  %tr
+    %th Versão
+    %th
+    %th
+  %tr
+    %td= xml.css('NFe infNFe verProc').text
+    %td
+    %td
+- unless (info = xml.css('NFe infNFe infAdic infAdFisco').text).blank?
+  %h3 Informações Adicionais de Interesse do Fisco
+  %table.table.table-condensed.inner
+    %tr
+      %td= info
+- unless (info = xml.css('NFe infNFe infAdic infCpl').text).blank?
+  %h3 Informações Adicionais de Interesse do Contribuinte
+  %table.table.table-condensed.inner
+    %tr
+      %td= info

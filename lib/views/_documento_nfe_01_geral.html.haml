@@ -1,0 +1,76 @@
+%h3 Dados da NF-e
+%table.table.table-condensed.table-striped.inner
+  %col(width='20%')/
+  %col(width='20%')/
+  %col(width='30%')/
+  %col(width='30%')/
+  %tr
+    %th Número
+    %th Série
+    %th Data de Emissão
+    %th Valor Total da Nota Fiscal
+  %tr
+    %td= number_with_delimiter_br xml.css('infNFe nNF').text
+    %td= xml.css('infNFe serie').text
+    %td= format_date xml.at_css('infNFe dEmi').text.to_date rescue xml.at_css('infNFe dEmi').text
+    %td= number_to_currency_br xml.css('infNFe total ICMSTot vNF').text.to_f
+
+%h3 Emitente
+%table.table.table-condensed.table-striped.inner
+  %col(width=130)/
+  %col/
+  %col(width=100)/
+  %col(width=50)/
+  %tr
+    %th CNPJ
+    %th Nome / Razão Social
+    %th IE
+    %th UF
+  %tr
+    %td= f xml.css('infNFe emit CNPJ').text
+    %td= xml.css('infNFe emit xNome').text
+    %td= xml.css('infNFe emit IE').text
+    %td= xml.css('infNFe emit UF').text
+
+%h3 Destinatário
+%table.table.table-condensed.table-striped.inner
+  %col(width=130)/
+  %col/
+  %col(width=100)/
+  %col(width=50)/
+  %tr
+    %th CNPJ
+    %th Nome / Razão Social
+    %th IE
+    %th UF
+  %tr
+    %td= f xml.css('infNFe dest CNPJ').text
+    %td= xml.css('infNFe dest xNome').text
+    %td= xml.css('infNFe dest IE').text
+    %td= xml.css('infNFe dest UF').text
+
+%h3 Emissão
+%table.table.table-condensed.table-striped.inner
+  %col(width='25%' span=4)/
+  %tr
+    %th Processo
+    %th Versão do Processo
+    %th Tipo de Emissão
+    %th Finalidade
+  %tr
+    %td= codigo_e_descricao xml.css('infNFe procEmi').text, :nfe, :processo_emissao
+    %td= xml.css('infNFe verProc').text
+    %td= codigo_e_descricao xml.css('infNFe tpEmis').text, :nfe, :tipo_emissao
+    %td= codigo_e_descricao xml.css('infNFe finNFe').text, :nfe, :finalidade_emissao
+  %tr
+    %th Natureza da Operação
+    %th Tipo da Operação
+    %th Forma de Pagamento
+    %th
+      %em Digest Value
+      da NF-e
+  %tr
+    %td= xml.css('infNFe ide natOp').text
+    %td= codigo_e_descricao xml.css('infNFe ide tpNF').text, :nfe, :tipo_operacao
+    %td= codigo_e_descricao xml.css('infNFe ide indPag').text, :nfe, :forma_pagamento
+    %td= xml.css('NFe Signature DigestValue').text

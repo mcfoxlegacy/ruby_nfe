@@ -1,0 +1,28 @@
+%h3 Dados dos Produtos e Serviços
+%table.table.table-condensed.table-striped.inner
+  %col(width='50')/
+  %col/
+  %col(width='70')/
+  %col(width='70')/
+  %col(width='90')/
+  %col(width='70')/
+  %tr
+    %th.c Num.
+    %th Descrição
+    %th.c Qtd.
+    %th.c Un. Coml.
+    %th.c Valor
+    %th
+  - xml.css('NFe infNFe det').each do |det|
+    - if (prod = det.css('prod')).size > 0
+      %tr
+        %td.c= det.attr('nItem')
+        %td= prod.css('xProd').text
+        %td.c= number_with_delimiter_br prod.css('qCom').text
+        %td.c= prod.css('uCom').text
+        %td.c= number_to_currency_br prod.css('vProd').text
+        %td.acoes
+          = link_to "#det-#{det.attr('nItem')}", class: 'modal-open' do
+            %i.icon-zoom-in
+            detalhes
+      - content_for(:modais) { render partial: "modal_nfe_produto", locals: { det: det, prod: prod } }

@@ -1,0 +1,66 @@
+%h3 Transporte
+- xml.css('NFe infNFe transp').tap do |transp|
+  %table.table.table-condensed.table-striped.inner
+    %tr
+      %th Modalidade do Frete
+    %tr
+      %td= codigo_e_descricao transp.css('modFrete').text, :nfe, :modalidade_frete
+
+  - if transp.css('transporta').size > 0
+    %h4 Transportador
+    %table.table.table-condensed.table-striped.inner
+      %col(width='33%')/
+      %col/
+      %tr
+        %th CNPJ
+        %th Razão Social / Nome
+      %tr
+        %td= f transp.css('transporta CNPJ').text
+        %td= transp.css('transporta xNome').text
+      %tr
+        %th Inscrição Estadual
+        %th Endereço Completo
+      %tr
+        %td= transp.css('transporta IE').text
+        %td= transp.css('transporta xEnder').text
+      %tr
+        %th UF
+        %th Município
+      %tr
+        %td= transp.css('transporta UF').text
+        %td= transp.css('transporta xMun').text
+
+  - if transp.css('veicTransp').size > 0
+    %h4 Veículo
+    %table.table.table-condensed.table-striped.inner
+      %col(width='33%' span=3)/
+      %tr
+        %th Placa
+        %th UF
+        %th
+      %tr
+        %td= f transp.css('veicTransp placa').text
+        %td= transp.css('veicTransp UF').text
+        %td
+
+  - if transp.css('vol').size > 0
+    %h4 Volumes
+    %table.table.table-condensed.table-striped.inner
+      %col(width='33%' span=3)/
+      - transp.css('vol').each do |vol|
+        %tr
+          %th Quantidade
+          %th Espécie
+          %th Marca dos Volumes
+        %tr
+          %td= vol.css('qVol').text
+          %td= vol.css('esp').text
+          %td= vol.css('marca').text
+        %tr
+          %th Peso Líquido (Kg)
+          %th Peso Bruto (Kg)
+          %th
+        %tr
+          %td= number_with_delimiter vol.css('pesoL').text
+          %td= number_with_delimiter vol.css('pesoB').text
+          %td

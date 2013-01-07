@@ -1,0 +1,136 @@
+pt:
+  codigos:
+    nfe:
+      processo_emissao:
+        '0': 'Aplicativo do Contribuinte'
+        '1': 'Avulsa pelo Fisco'
+        '2': 'Contribuinte pelo site do Fisco'
+        '3': 'Contribuinte com aplicativo fornecido pelo Fisco'
+      tipo_emissao:
+        '1': 'Normal'
+        '2': 'Contingência FS'
+        '3': 'Contingência SCAN'
+        '4': 'Contingência DPEC'
+        '5': 'Contingência FS-DA'
+      finalidade_emissao:
+        '1': 'Normal'
+        '2': 'Complementar'
+        '3': 'De ajuste'
+      tipo_operacao:
+        '0': 'Entrada'
+        '1': 'Saída'
+      forma_pagamento:
+        '0': 'À Vista'
+        '1': 'À Prazo'
+        '2': 'Outros'
+      modalidade_frete:
+        '0': 'Por conta do emitente'
+        '1': 'Por conta do destinatário/remetente'
+        '2': 'Por conta de terceiros'
+        '9': 'Sem frete'
+      crt:
+        '1': 'Simples Nacional'
+        '2': 'Simples Nacional – excesso de sublimite de receita bruta'
+        '3': 'Regime Normal'
+      ind_tot:
+        '1': 'Valor deste Item compõe o valor total da NF-e'
+      ipi:
+        cst:
+          '01': 'Entrada tributada com alíquota zero'
+          '02': 'Entrada isenta'
+          '03': 'Entrada não-tributada'
+          '04': 'Entrada imune'
+          '05': 'Entrada com suspensão'
+          '51': 'Saída tributada com alíquota zero'
+          '52': 'Saída isenta'
+          '53': 'Saída não-tributada'
+          '54': 'Saída imune'
+          '55': 'Saída com suspensão'
+      icms:
+        origem:
+          '0': 'Nacional'
+          '1': 'Estrangeira – Importação direta'
+          '2': 'Estrangeira – Adquirida no mercado interno'
+        cst: &icms_cst
+          '00': 'Tributada integralmente'
+          '20': 'Tributação com BC reduzida do ICMS'
+          '40': 'ICMS isenção'
+          '41': 'ICMS não tributada'
+          '51': 'ICMS diferido'
+          '60': 'ICMS cobrado anteriormente por substituição tributária'
+          '90': 'ICMS outros'
+        mod_bc_icms_normal:
+          '0': 'Margem Valor Agregado (%)'
+          '1': 'Pauta (Valor)'
+          '2': 'Preço Tabelado Máx. (Valor)'
+          '3': 'Valor da operação'
+      formato_impressao:
+        '1': 'Retrato'
+        '2': 'Paisagem'
+      ambiente_sefaz:
+        '1': 'Produção'
+        '2': 'Homologação'
+    cte:
+      unidade:
+        '00': 'M3'
+        '01': 'KG'
+        '02': 'TON'
+        '03': 'UNIDADE'
+        '04': 'LITROS'
+        '05': 'MMBTU'
+      ator:
+        emit: 'Emitente'
+        toma: 'Tomador do Serviço'
+        rem: 'Remetente'
+        dest: 'Destinatário'
+        receb: 'Recebedor'
+        exped: 'Expedidor'
+      modal:
+        '01': 'Rodoviário'
+        '02': 'Aéreo'
+        '03': 'Aquaviário'
+        '04': 'Ferroviário'
+        '05': 'Dutoviário'
+        sigla:
+          '01': 'Rodov.'
+          '02': 'Aéreo'
+          '03': 'Aquav.'
+          '04': 'Ferrov.'
+          '05': 'Dutov.'
+      aereo:
+        carga:
+          informacoes_manuseio:
+            '1': 'Certificado do expedidor para embarque de animal vivo'
+            '2': 'Artigo perigoso conforme Declaração do Expedidor anexa'
+            '3': 'Somente em aeronave cargueira'
+            '4': 'Artigo perigoso - declaração do expedidor não requerida'
+            '5': 'Artigo perigoso em quantidade isenta'
+            '6': 'Gelo seco para refrigeração'
+            '7': 'Não restrito'
+            '8': 'Artigo perigoso em carga consolidada'
+            '9': 'Autorização da autoridade governamental anexa'
+            '99': 'Outro'
+      tipo_servico:
+        '0': 'Normal'
+        '1': 'Subcontratação'
+        '2': 'Redespacho'
+        '3': 'Redespacho Intermediário'
+      tipo_emissao:
+        '1': 'Normal'
+        '5': 'Contingência FSDA'
+        '7': 'Autorização pela SVC-RS'
+        '8': 'Autorização pela SVC-SP'
+      tomador:
+        '0': 'Remetente'
+        '1': 'Expedidor'
+        '2': 'Recebedor'
+        '3': 'Destinatário'
+        '4': 'Outros'
+      finalidade:
+        '0': 'CT-e Normal'
+        '1': 'CT-e de Complemento de Valores'
+        '2': 'CT-e de Anulação de Valores'
+        '3': 'CT-e Substituto'
+      icms:
+        cst:
+          <<: *icms_cst

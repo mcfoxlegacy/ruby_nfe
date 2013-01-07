@@ -1,0 +1,51 @@
+%h3 Emitente
+%table.table.table-condensed.table-striped.inner
+  %col(width='50%' span=2)/
+  %tr
+    %th Nome / Razão Social
+    %th Nome Fantasia
+  %tr
+    %td= xml.css('NFe infNFe emit xNome').text
+    %td= xml.css('NFe infNFe emit xFant').text
+  %tr
+    %th CNPJ
+    %th Endereço
+  %tr
+    %td= f xml.css('NFe infNFe emit CNPJ').text
+    %td= [xml.css('NFe infNFe emit xLgr').text, xml.css('NFe infNFe emit nro').text, xml.css('NFe infNFe emit xCpl').text].reject(&:blank?).compact * ', '
+  %tr
+    %th Bairro / Distrito
+    %th CEP
+  %tr
+    %td= xml.css('NFe infNFe emit xBairro').text
+    %td= f xml.css('NFe infNFe emit CEP').text, mask: :cep
+  %tr
+    %th Município
+    %th Fone / Fax
+  %tr
+    %td= xml.css('NFe infNFe emit cMun').text + ' - ' + xml.css('NFe infNFe emit xMun').text
+    %td= f xml.css('NFe infNFe emit fone').text, mask: :fone
+  %tr
+    %th UF
+    %th País
+  %tr
+    %td= xml.css('NFe infNFe emit UF').text
+    %td= xml.css('NFe infNFe emit cPais').text + ' - ' +  xml.css('NFe infNFe emit xPais').text
+  %tr
+    %th Inscrição Estadual
+    %th
+  %tr
+    %td= xml.css('NFe infNFe emit IE').text
+    %td
+  %tr
+    %th Inscrição Municipal
+    %th Município da Ocorrência do Fato Gerador do ICMS
+  %tr
+    %td= xml.css('NFe infNFe emit IM').text
+    %td= xml.css('NFe infNFe cMunFG').text
+  %tr
+    %th CNAE Fiscal
+    %th Código de Regime Tributário
+  %tr
+    %td= xml.css('NFe infNFe emit CNAE').text
+    %td= codigo_e_descricao xml.css('NFe infNFe emit CRT').text, :nfe, :crt

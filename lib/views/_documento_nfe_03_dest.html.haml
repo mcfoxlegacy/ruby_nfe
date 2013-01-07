@@ -1,0 +1,39 @@
+%h3 Destinatário
+%table.table.table-condensed.table-striped.inner
+  %col(width='50%' span=2)/
+  %tr
+    %th(colspan=2) Nome / Razão Social
+  %tr
+    %td(colspan=2)= xml.css('NFe infNFe dest xNome').text
+  %tr
+    %th CNPJ
+    %th Endereço
+  %tr
+    %td= f xml.css('NFe infNFe dest CNPJ').text
+    %td= [xml.css('NFe infNFe dest xLgr').text, xml.css('NFe infNFe dest nro').text, xml.css('NFe infNFe dest xCpl').text].reject(&:blank?).compact * ', '
+  %tr
+    %th Bairro / Distrito
+    %th CEP
+  %tr
+    %td= xml.css('NFe infNFe dest xBairro').text
+    %td= f xml.css('NFe infNFe dest CEP').text, mask: :cep
+  %tr
+    %th(colspan=2) Município
+  %tr
+    %td(colspan=2)= xml.css('NFe infNFe dest cMun').text + ' - ' + xml.css('NFe infNFe dest xMun').text
+  %tr
+    %th UF
+    %th País
+  %tr
+    %td= xml.css('NFe infNFe dest UF').text
+    %td= xml.css('NFe infNFe dest cPais').text + ' - ' +  xml.css('NFe infNFe dest xPais').text
+  %tr
+    %th Inscrição Estadual
+    %th
+  %tr
+    %td= xml.css('NFe infNFe dest IE').text
+    %td
+  %tr
+    %th(colspan=2) E-mail
+  %tr
+    %td(colspan=2)= xml.css('NFe infNFe dest email').text
