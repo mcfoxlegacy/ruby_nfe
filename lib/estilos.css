@@ -1,10 +1,10 @@
-.visualizacao-documento
+.ruby-nfe-visdoc
  table {
  	 	width: 100%;
 		margin-bottom: 18px;
-       }
+ }
 
-.visualizacao-documento 
+.ruby-nfe-visdoc 
  table.table 
   th { 
   		text-align:left; 
@@ -12,16 +12,24 @@
   		color:#7D2B3D; 
   		font-size:8.5pt;
 		  margin-bottom: 18px; 
-     }
+  }
 
-.visualizacao-documento 
+.ruby-nfe-visdoc 
  table.table.inner{ margin-bottom:.3em }
 
-.visualizacao-documento 
+.ruby-nfe-visdoc 
  table.table.inner 
   td { font-size:8.5pt }
 
-.visualizacao-documento h3,
-.visualizacao-documento h4 { margin:0 0 .2em .4em }
-.visualizacao-documento h3 { font-size:10pt; text-transform:uppercase }
-.visualizacao-documento h4 { font-size:9pt }
+.ruby-nfe-visdoc h3,
+.ruby-nfe-visdoc h4 { margin:0 0 .2em .4em }
+.ruby-nfe-visdoc h3 { font-size:10pt; text-transform:uppercase }
+.ruby-nfe-visdoc h4 { font-size:9pt }
+
+.ruby-nfe-visdoc
+table tr.nodata td {
+  text-align: center;
+  font-style: italic;
+  padding: 25px 0;
+  font-size: 9pt;
+}

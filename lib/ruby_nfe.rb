@@ -2,8 +2,8 @@
 require "ruby_nfe/version"
 require "nokogiri"
 require "haml"
-#require "i18n"
-#require "action_view"
+require "i18n"
+require "action_view"
 
 include ActionView::Helpers::NumberHelper
 
@@ -61,9 +61,7 @@ def number_with_delimiter_br(number)
 end
 
 def format_date(dt)
-  a_data = dt.split('-')
-  data = Date.new(aoi[0], aoi[1], aoi[2])
-  data.strftime("%d/%b/%Y")
+  dt.strftime("%d/%b/%Y")
 end
 
 def codigo_e_descricao(cod, *escopo)
