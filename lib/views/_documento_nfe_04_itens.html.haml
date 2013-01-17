@@ -22,7 +22,9 @@
         %td.c= prod.css('uCom').text
         %td.c= number_to_currency_br prod.css('vProd').text
         %td.acoes
-          = link_to "#det-#{det.attr('nItem')}", class: 'modal-open' do
+          %a.modal-open{:href => "#det-#{det.attr('nItem')}", :"data-toggle" => 'modal'}
             %i.icon-zoom-in
             detalhes
-      - content_for(:modais) { render partial: "modal_nfe_produto", locals: { det: det, prod: prod } }
+- xml.css('NFe infNFe det').each do |det|
+  - if (prod = det.css('prod')).size > 0
+    = render 'modal_nfe_produto', {:xml => xml, :prod => prod, :det => det}

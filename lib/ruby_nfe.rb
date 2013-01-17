@@ -2,11 +2,12 @@
 require "ruby_nfe/version"
 require "nokogiri"
 require "haml"
-require "i18n"
-require "action_view"
+#require "i18n"
+#require "action_view"
 
 include ActionView::Helpers::NumberHelper
-include ActionView::Helpers::UrlHelper
+
+$ruby_nfe_path_loaded = false
 
 module RubyNfe
 
@@ -31,19 +32,9 @@ module RubyNfe
       result
     end
 
-    def estilos
-      # http://bootstrapcdn.com/
-      # https://developers.google.com/speed/libraries/devguide#jquery
-      
-      "<link href=\"http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css\" rel=\"stylesheet\">"
-        .concat("<script src=\"http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js\"></script>\n")
-        .concat("<style type=\"text/css\">")
-        .concat(File.read(File.dirname(__FILE__) + "/estilos.css"))
-        .concat("</style>")
-    end
-
     def render_documento
-      html = estilos.concat(render("documento", {:xml => @xml}))
+      html = "<style type=\"text/css\">" + File.read(File.dirname(__FILE__) + "/estilos.css") + "</style>"
+      html = html + render("documento", {:xml => @xml})
       html.html_safe
     end
 
@@ -70,25 +61,31 @@ def number_with_delimiter_br(number)
 end
 
 def format_date(dt)
-  strftime("%d/%b/%Y")
+  a_data = dt.split('-')
+  data = Date.new(aoi[0], aoi[1], aoi[2])
+  data.strftime("%d/%b/%Y")
 end
 
 def codigo_e_descricao(cod, *escopo)
   return nil if cod.blank?
 
-  I18n.load_path += Dir[File.expand_path(File.join(File.dirname(__FILE__), '/locales', '*.yml')).to_s]
-  I18n.reload!
-  "#{cod} - #{I18n.t(cod, default: '?', locale: 'pt', scope: %w(codigos) + escopo)}"
+  if !$ruby_nfe_path_loaded
+    I18n.load_path += Dir[File.expand_path(File.join(File.dirname(__FILE__), '/locales', '*.yml')).to_s]
+    I18n.reload!
+    $ruby_nfe_path_loaded = true
+  end
+  "#{cod} - #{I18n.t(cod, :default => '?', :locale => 'pt', :scope => %w(codigos) + escopo)}"
 rescue => e
   cod
 end
 
 FORMAT_MASKS = {
-      fone: { regex: /(..)(.{4,})(.{4})/, replacement: '(\1) \2-\3' },
-      cep: { size: 8, regex: /(.....)(...)/, replacement: '\1-\2' },
-      cpf: { size: 11, regex: /(...)(...)(...)(..)/, replacement: '\1.\2.\3-\4' },
-      cnpj: { size: 14, regex: /(..)(...)(...)(....)(..)/, replacement: '\1.\2.\3/\4-\5' },
-      chave: { size: 44, regex: /(..)(....)(.{14})(..)(...)(.{9})(.)(.{8})(.)/, replacement: '\1 \2 \3 \4 \5 \6 \7 \8 \9' }
+      :fone => { :regex => /(..)(.{4,})(.{4})/, :replacement => '(\1) \2-\3' },
+      :cep => { :size => 8, :regex => /(.....)(...)/, :replacement => '\1-\2' },
+      :cpf => { :size => 11, :regex => /(...)(...)(...)(..)/, :replacement => '\1.\2.\3-\4' },
+      :cnpj => { :size => 14, :regex => /(..)(...)(...)(....)(..)/, :replacement => '\1.\2.\3/\4-\5' },
+      :chave => { :size => 44, :regex => /(..)(....)(.{14})(..)(...)(.{9})(.)(.{8})(.)/,
+                  :replacement => '\1 \2 \3 \4 \5 \6 \7 \8 \9' }
 }
 
 def f(s, options = { })

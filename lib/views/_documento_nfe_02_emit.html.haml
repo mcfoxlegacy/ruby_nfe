@@ -18,13 +18,13 @@
     %th CEP
   %tr
     %td= xml.css('NFe infNFe emit xBairro').text
-    %td= f xml.css('NFe infNFe emit CEP').text, mask: :cep
+    %td= f xml.css('NFe infNFe emit CEP').text, :mask => :cep
   %tr
     %th Município
     %th Fone / Fax
   %tr
     %td= xml.css('NFe infNFe emit cMun').text + ' - ' + xml.css('NFe infNFe emit xMun').text
-    %td= f xml.css('NFe infNFe emit fone').text, mask: :fone
+    %td= f xml.css('NFe infNFe emit fone').text, :mask => :fone
   %tr
     %th UF
     %th País

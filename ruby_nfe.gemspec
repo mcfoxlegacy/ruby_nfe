@@ -6,8 +6,8 @@ require 'ruby_nfe/version'
 Gem::Specification.new do |gem|
   gem.name          = "ruby_nfe"
   gem.version       = RubyNfe::VERSION
-  gem.authors       = ["Natanael Ritter Willrich"]
-  gem.email         = ["natanael@softpagina.com.br"]
+  gem.authors       = ["Softpagina"]
+  gem.email         = ["suporte@softpagina.com.br"]
   gem.description   = %q{Montar uma visualização da NFe}
   gem.summary       = %q{Monta uma visualização da NFe}
   gem.homepage      = ""

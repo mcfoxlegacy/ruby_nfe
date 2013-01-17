@@ -1,5 +1,5 @@
 -# variáveis locais: det, prod
-.modal{style: "display: none; width: 800px; margin-left: -400px", id: "det-#{det.attr('nItem')}"}
+.modal{:style => "display: none; width: 800px; margin-left: -400px", :id => "det-#{det.attr('nItem')}"}
   .modal-header
     %a.close(data-dismiss="modal") ×
     %h3 Detalhes do Item #{det.attr('nItem')}: #{prod.css('xProd').text}
@@ -79,4 +79,4 @@
           %tr
             %td= codigo_e_descricao ipi.css('IPINT CST').text, :nfe, :ipi, :cst
   .modal-footer
-    = link_to 'Fechar', '#', class: 'btn', data: { dismiss: 'modal' }
+    %a.btn(data-dismiss="modal")Fechar
