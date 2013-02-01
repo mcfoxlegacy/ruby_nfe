@@ -12,36 +12,25 @@ $ruby_nfe_path_loaded = false
 module RubyNfe
 
   class NfeToHtml
-    attr_accessor :xml
+    attr_reader :xml
 
     def initialize(xml)
       @xml = Nokogiri::XML(xml)
       @xml.remove_namespaces!
     end
     
-    def [](xpath)
-      node = @xml.css(xpath)
-      return node ? node.text : ''
-    end
-    
-    def collect(xpath, &block)
-      result = []
-      @xml.xpath(xpath).each do |det|
-        result << yield(det)
-      end
-      result
-    end
-
     def render_documento
       html = "<style type=\"text/css\">" + File.read(File.dirname(__FILE__) + "/estilos.css") + "</style>"
       html = html + render("documento", {:xml => @xml})
       html.html_safe
     end
 
-  end # class
-end # module
+  end
+end
 
 def render(partial, locals = {})
+  return '' if partial.nil? || partial.empty?
+
   template = File.read(File.dirname(__FILE__) + "/views/_#{partial}.html.haml")
   Haml::Engine.new(template).render(Object.new, locals)
 end
@@ -53,14 +42,20 @@ end
 
 # funções formatação
 def number_to_currency_br(number)
+  return '?' if number.nil?
+
   number_to_currency(number, :unit => "R$ ", :separator => ",", :delimiter => ".")
 end
 
 def number_with_delimiter_br(number)
+  return '?' if number.nil?
+
   number_with_delimiter(number, :delimiter => ".", :separator => ",")
 end
 
 def format_date(dt)
+  return '' if dt.nil?
+
   dt.strftime("%d/%b/%Y")
 end
 
@@ -78,12 +73,12 @@ rescue => e
 end
 
 FORMAT_MASKS = {
-      :fone => { :regex => /(..)(.{4,})(.{4})/, :replacement => '(\1) \2-\3' },
-      :cep => { :size => 8, :regex => /(.....)(...)/, :replacement => '\1-\2' },
-      :cpf => { :size => 11, :regex => /(...)(...)(...)(..)/, :replacement => '\1.\2.\3-\4' },
-      :cnpj => { :size => 14, :regex => /(..)(...)(...)(....)(..)/, :replacement => '\1.\2.\3/\4-\5' },
-      :chave => { :size => 44, :regex => /(..)(....)(.{14})(..)(...)(.{9})(.)(.{8})(.)/,
-                  :replacement => '\1 \2 \3 \4 \5 \6 \7 \8 \9' }
+  :fone => { :regex => /(..)(.{4,})(.{4})/, :replacement => '(\1) \2-\3' },
+  :cep => { :size => 8, :regex => /(.....)(...)/, :replacement => '\1-\2' },
+  :cpf => { :size => 11, :regex => /(...)(...)(...)(..)/, :replacement => '\1.\2.\3-\4' },
+  :cnpj => { :size => 14, :regex => /(..)(...)(...)(....)(..)/, :replacement => '\1.\2.\3/\4-\5' },
+  :chave => { :size => 44, :regex => /(..)(....)(.{14})(..)(...)(.{9})(.)(.{8})(.)/,
+              :replacement => '\1 \2 \3 \4 \5 \6 \7 \8 \9' }
 }
 
 def f(s, options = { })
