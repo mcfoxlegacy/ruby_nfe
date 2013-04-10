@@ -22,12 +22,18 @@
   %col(width=100)/
   %col(width=50)/
   %tr
-    %th CNPJ
+    - if !(cnpj = xml.css('infNFe emit CNPJ')).empty?
+      %th CNPJ
+    - else
+      %th CPF
     %th Nome / Razão Social
     %th IE
     %th UF
   %tr
-    %td= f xml.css('infNFe emit CNPJ').text
+    - if !(cnpj = xml.css('infNFe emit CNPJ')).empty?
+      %td= f xml.css('infNFe emit CNPJ').text
+    - else
+      %td= f xml.css('infNFe emit CPF').text
     %td= xml.css('infNFe emit xNome').text
     %td= xml.css('infNFe emit IE').text
     %td= xml.css('infNFe emit UF').text
@@ -39,12 +45,18 @@
   %col(width=100)/
   %col(width=50)/
   %tr
-    %th CNPJ
+    - if !(cnpj = xml.css('infNFe dest CNPJ')).empty?
+      %th CNPJ
+    - else
+      %th CPF
     %th Nome / Razão Social
     %th IE
     %th UF
   %tr
-    %td= f xml.css('infNFe dest CNPJ').text
+    - if !(cnpj = xml.css('infNFe dest CNPJ')).empty?
+      %td= f xml.css('infNFe dest CNPJ').text
+    - else
+      %td= f xml.css('infNFe dest CPF').text
     %td= xml.css('infNFe dest xNome').text
     %td= xml.css('infNFe dest IE').text
     %td= xml.css('infNFe dest UF').text

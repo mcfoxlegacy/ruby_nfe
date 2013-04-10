@@ -12,10 +12,16 @@
       %col(width='33%')/
       %col/
       %tr
-        %th CNPJ
+        - if !(cnpj = transp.css('transporta CNPJ')).empty?
+          %th CNPJ
+        - else
+          %th CPF
         %th Razão Social / Nome
       %tr
-        %td= f transp.css('transporta CNPJ').text
+        - if !(cnpj = transp.css('transporta CNPJ')).empty?
+          %td= f transp.css('transporta CNPJ').text
+        - else
+          %td= f transp.css('transporta CPF').text
         %td= transp.css('transporta xNome').text
       %tr
         %th Inscrição Estadual

@@ -6,10 +6,16 @@
   %tr
     %td(colspan=2)= xml.css('NFe infNFe dest xNome').text
   %tr
-    %th CNPJ
+    - if !(cnpj = xml.css('NFe infNFe dest CNPJ')).empty?
+      %th CNPJ
+    - else
+      %th CPF
     %th Endereço
   %tr
-    %td= f xml.css('NFe infNFe dest CNPJ').text
+    - if !(cnpj = xml.css('NFe infNFe dest CNPJ')).empty?
+      %td= f xml.css('NFe infNFe dest CNPJ').text
+    - else
+      %td= f xml.css('NFe infNFe dest CPF').text
     %td= [xml.css('NFe infNFe dest xLgr').text, xml.css('NFe infNFe dest nro').text, xml.css('NFe infNFe dest xCpl').text].reject(&:blank?).compact * ', '
   %tr
     %th Bairro / Distrito
