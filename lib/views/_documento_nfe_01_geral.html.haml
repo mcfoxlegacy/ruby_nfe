@@ -12,7 +12,12 @@
   %tr
     %td= number_with_delimiter_br xml.css('infNFe nNF').text
     %td= xml.css('infNFe serie').text
-    %td= format_date xml.at_css('infNFe dEmi').text.to_date rescue xml.at_css('infNFe dEmi').text
+
+    -dt_emissao = xml.at_css('infNFe dEmi')
+    -dt_emissao ||= xml.at_css('infNFe dhEmi')
+
+
+    %td= format_date dt_emissao.text.to_date rescue dt_emissao.text
     %td= number_to_currency_br xml.css('infNFe total ICMSTot vNF').text.to_f
 
 %h3 Emitente
